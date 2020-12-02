@@ -11,7 +11,10 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(drc)
 library(bmd)
-
+library(proast70.0)
+library(assertive)
+library(hwriter)
+install.packages(c('assertive', 'gWidgetstcltk', 'hwriter'))
 ```
 
 
@@ -77,20 +80,38 @@ dr_tcdd1_m1 <-
            fct = LL.2(),
            type = "binomial")
 
-dr_tcdd_m1
-summary(dr_tcdd_m1)
+dr_tcdd1_m1
+summary(dr_tcdd1_m1)
 
 
 plot(dr_tcdd_m1)
 
 ## Estimated TD values
-ED(dr_tcdd_m1, c(5, 10, 50), interval = "delta")
+ED(dr_tcdd1_m1, c(5, 10, 50), interval = "delta")
 
 
 ## Excess risk with BMR=5% and background 0
-bmd(dr_tcdd_m1, c(0.05, 0.1))
 
-
+bmd(dr_tcdd1_m1, c(0.05, 0.1))
 
 ```
+
+
+PROAST
+The National Institute for Public Health and the Environment of the Netherlands
+(RIVM) software for dose-response modelling and benchmark dose analysis (PROAST) 
+
+```{r}
+
+data(das11)
+das11
+
+
+f.proast(das11)
+
+# 1,3,1,13(relative kidney weights), 1, 0, 2, 200, 2
+
+```
+
+
 
