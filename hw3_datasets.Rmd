@@ -1,0 +1,64 @@
+---
+title: "hw_3_datasets"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+
+```
+
+
+```{r}
+
+set.seed(15)
+
+#74 wells
+
+
+m <- 0.065
+s <- 0.02
+location <- log(m^2 / sqrt(s^2 + m^2))
+shape <- sqrt(log(1 + (s^2 / m^2)))
+print(paste("location:", location))
+print(paste("shape:", shape))
+
+wells <- rlnorm(n = 74, location, shape) %>% 
+  round(., 4)
+
+
+wells
+
+wells_df <-
+  wells %>%
+  as_tibble() %>% 
+  rename(concentration_ppm = value)
+
+wells_df
+
+max(wells)
+
+wells %>%
+  as_tibble() %>% 
+  ggplot(aes(x = value)) +
+    geom_histogram(bins = 50)
+
+plot(ecdf(wells))
+
+mean(wells)
+
+quantile(wells,  probs = c(90, 95, 99)/100)
+
+
+write_rds(wells_df, "wells.rds")
+
+write_excel_csv(wells_df, "wells.csv")
+
+write_excel(wells_df, "wells.xls")
+
+```
+

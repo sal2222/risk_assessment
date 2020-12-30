@@ -84,7 +84,7 @@ dr_tcdd1_m1
 summary(dr_tcdd1_m1)
 
 
-plot(dr_tcdd_m1)
+plot(dr_tcdd1_m1)
 
 ## Estimated TD values
 ED(dr_tcdd1_m1, c(5, 10, 50), interval = "delta")
